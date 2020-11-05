@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { auth } from "./firebase";
+import styled from "styled-components/native";
 
 const AuthContext = React.createContext({});
 
@@ -14,8 +15,10 @@ function AuthScreen({ navigation, setAuth }: any) {
   const { login } = useContext(AuthContext);
   return (
     <View style={styles.myview}>
-      <Text>Auth Screen</Text>
-      <Button title="Log In" onPress={() => login()}></Button>
+      <Card>
+        <Text>Auth Screen</Text>
+        <Button title="Log In" onPress={() => login()}></Button>
+      </Card>
     </View>
   );
 }
@@ -25,7 +28,7 @@ function HomeScreen({ navigation, setAuth }: any) {
   const { logout } = useContext(AuthContext);
   return (
     <View style={styles.myview}>
-      <Text>Home Screen, You are logged in!</Text>
+      <Text>Is ka witz</Text>
       <Text>UID: {currentUser.uid}</Text>
       <Button title="Log Out" onPress={() => logout()}></Button>
     </View>
@@ -43,7 +46,7 @@ function SettingsScreen({ navigation, setAuth }: any) {
 const HomeTabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen component={HomeScreen} name="Home" />
+      <Tab.Screen component={HomeScreen} name="Start" />
       <Tab.Screen component={SettingsScreen} name="Settings" />
     </Tab.Navigator>
   );
@@ -101,3 +104,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+const Card = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+  height: 50%;
+  width: 80%;
+  background-color: #292929;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+`;
